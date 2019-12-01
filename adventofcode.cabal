@@ -40,3 +40,8 @@ library aocsplit
   hs-source-dirs:  lib
   exposed-modules: AdventOfCode.Split
   build-depends:   base
+
+executable 01_rocket_equation
+  import: bin, flags
+  build-depends: base, adventofcode2019
+  main-is:       01_rocket_equation.hs
