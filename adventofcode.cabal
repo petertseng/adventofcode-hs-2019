@@ -18,3 +18,9 @@ library aocsplit
   exposed-modules: AdventOfCode.Split
   ghc-options:     -Wall
   build-depends:   base
+
+executable 01_rocket_equation
+  build-depends:  base, adventofcode2019
+  hs-source-dirs: bin
+  main-is:        01_rocket_equation.hs
+  ghc-options:    -Wall
