@@ -74,3 +74,4 @@ install:
 script:
   - cabal new-build -w ${HC}
   - ghc-pkg list # to debug
+  - cabal new-test -w ${HC}

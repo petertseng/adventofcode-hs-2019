@@ -13,14 +13,36 @@ library
   ghc-options:     -Wall
   build-depends:   base
 
+library aocintcode
+  hs-source-dirs:  lib
+  exposed-modules: AdventOfCode.Intcode
+  ghc-options:     -Wall
+  build-depends:   base, array, containers
+
 library aocsplit
   hs-source-dirs:  lib
   exposed-modules: AdventOfCode.Split
   ghc-options:     -Wall
   build-depends:   base
 
+test-suite test-intcode
+  type:           exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is:        intcode.hs
+  -- without -dynamic:
+  -- Could not find module ‘Test.HUnit’
+  -- There are files missing in the ‘HUnit-1.6.0.0’ package,
+  ghc-options:    -Wall -dynamic
+  build-depends:  base, aocintcode, containers, HUnit
+
 executable 01_rocket_equation
   build-depends:  base, adventofcode2019
   hs-source-dirs: bin
   main-is:        01_rocket_equation.hs
+  ghc-options:    -Wall
+
+executable 02_intcode
+  build-depends:  base, aocintcode, containers
+  hs-source-dirs: bin
+  main-is:        02_intcode.hs
   ghc-options:    -Wall
