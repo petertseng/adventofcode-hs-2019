@@ -67,3 +67,8 @@ executable 02_intcode
   import: bin, flags
   build-depends: base, aocintcode
   main-is:       02_intcode.hs
+
+executable 03_crossed_wires
+  import: bin, flags
+  build-depends: base, adventofcode2019, aocsplit
+  main-is:       03_crossed_wires.hs
