@@ -46,3 +46,9 @@ executable 02_intcode
   hs-source-dirs: bin
   main-is:        02_intcode.hs
   ghc-options:    -Wall
+
+executable 03_crossed_wires
+  build-depends:  base, adventofcode2019, aocsplit, containers
+  hs-source-dirs: bin
+  main-is:        03_crossed_wires.hs
+  ghc-options:    -Wall
