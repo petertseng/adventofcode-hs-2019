@@ -52,3 +52,9 @@ executable 03_crossed_wires
   hs-source-dirs: bin
   main-is:        03_crossed_wires.hs
   ghc-options:    -Wall
+
+executable 04_password
+  build-depends:  base, aocsplit, filepath
+  hs-source-dirs: bin
+  main-is:        04_password.hs
+  ghc-options:    -Wall
