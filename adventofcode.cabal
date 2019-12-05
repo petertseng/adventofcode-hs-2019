@@ -77,3 +77,8 @@ executable 04_password
   import: bin, flags
   build-depends: base, aocsplit, filepath
   main-is:       04_password.hs
+
+executable 05_intcode_ii
+  import: bin, flags
+  build-depends: base, aocintcode
+  main-is:       05_intcode_ii.hs
