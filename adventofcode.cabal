@@ -58,3 +58,9 @@ executable 04_password
   hs-source-dirs: bin
   main-is:        04_password.hs
   ghc-options:    -Wall
+
+executable 05_intcode_ii
+  build-depends:  base, aocintcode, containers
+  hs-source-dirs: bin
+  main-is:        05_intcode_ii.hs
+  ghc-options:    -Wall
