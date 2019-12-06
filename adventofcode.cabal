@@ -41,6 +41,12 @@ library aocintcode
   exposed-modules: AdventOfCode.Intcode
   build-depends:   base, array, containers
 
+library aocsearch
+  import: flags
+  hs-source-dirs:  lib
+  exposed-modules: AdventOfCode.Search
+  build-depends:   base, containers
+
 library aocsplit
   import: flags
   hs-source-dirs:  lib
@@ -82,3 +88,8 @@ executable 05_intcode_ii
   import: bin, flags
   build-depends: base, aocintcode
   main-is:       05_intcode_ii.hs
+
+executable 06_universal_orbit_map
+  import: bin, flags
+  build-depends: base, adventofcode2019, aocsearch, aocsplit, containers
+  main-is:       06_universal_orbit_map.hs
