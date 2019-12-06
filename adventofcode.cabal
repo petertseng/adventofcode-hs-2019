@@ -19,6 +19,12 @@ library aocintcode
   ghc-options:     -Wall
   build-depends:   base, array, containers
 
+library aocsearch
+  hs-source-dirs:  lib
+  exposed-modules: AdventOfCode.Search
+  ghc-options:     -Wall
+  build-depends:   base, containers
+
 library aocsplit
   hs-source-dirs:  lib
   exposed-modules: AdventOfCode.Split
@@ -63,4 +69,10 @@ executable 05_intcode_ii
   build-depends:  base, aocintcode, containers
   hs-source-dirs: bin
   main-is:        05_intcode_ii.hs
+  ghc-options:    -Wall
+
+executable 06_universal_orbit_map
+  build-depends:  base, adventofcode2019, aocsearch, aocsplit, containers
+  hs-source-dirs: bin
+  main-is:        06_universal_orbit_map.hs
   ghc-options:    -Wall
