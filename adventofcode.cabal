@@ -76,3 +76,9 @@ executable 06_universal_orbit_map
   hs-source-dirs: bin
   main-is:        06_universal_orbit_map.hs
   ghc-options:    -Wall
+
+executable 07_amplification_circuit
+  build-depends:  base, aocintcode, containers
+  hs-source-dirs: bin
+  main-is:        07_amplification_circuit.hs
+  ghc-options:    -Wall
