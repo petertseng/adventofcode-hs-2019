@@ -93,3 +93,8 @@ executable 06_universal_orbit_map
   import: bin, flags
   build-depends: base, adventofcode2019, aocsearch, aocsplit, containers
   main-is:       06_universal_orbit_map.hs
+
+executable 07_amplification_circuit
+  import: bin, flags
+  build-depends: base, aocintcode
+  main-is:       07_amplification_circuit.hs
