@@ -98,3 +98,8 @@ executable 07_amplification_circuit
   import: bin, flags
   build-depends: base, aocintcode
   main-is:       07_amplification_circuit.hs
+
+executable 08_space_image_format
+  import: bin, flags
+  build-depends: base, adventofcode2019
+  main-is:       08_space_image_format.hs
