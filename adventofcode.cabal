@@ -82,3 +82,9 @@ executable 07_amplification_circuit
   hs-source-dirs: bin
   main-is:        07_amplification_circuit.hs
   ghc-options:    -Wall
+
+executable 08_space_image_format
+  build-depends:  base, adventofcode2019
+  hs-source-dirs: bin
+  main-is:        08_space_image_format.hs
+  ghc-options:    -Wall
