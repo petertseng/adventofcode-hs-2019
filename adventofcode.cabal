@@ -103,3 +103,8 @@ executable 08_space_image_format
   import: bin, flags
   build-depends: base, adventofcode2019
   main-is:       08_space_image_format.hs
+
+executable 09_intcode_relative
+  import: bin, flags
+  build-depends: base, aocintcode
+  main-is:       09_intcode_relative.hs
