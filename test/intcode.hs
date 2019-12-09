@@ -53,6 +53,11 @@ cmpJmpTests = concatMap toTests cmpJmpTable
         toTest mem (inval, out) = TestCase (assertEqual (show mem ++ " input " ++ show inval) [out] (run inval mem))
         run inval = output . continueInput inval . computer
 
+quineTest :: Test
+quineTest = TestCase (assertEqual (show quine) quine (run quine))
+  where run = output . continueDefault . computer
+        quine = [109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99]
+
 exitProperly :: IO Counts -> IO ()
 exitProperly m = do
   counts <- m
@@ -65,4 +70,5 @@ main = exitProperly $ runTestTT tests
           , TestLabel "I/O" ioTest
           , TestLabel "param mode" (TestList paramModeTests)
           , TestLabel "cmpJmp" (TestList cmpJmpTests)
+          , TestLabel "quine" quineTest
           ]

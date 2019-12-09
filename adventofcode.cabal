@@ -88,3 +88,9 @@ executable 08_space_image_format
   hs-source-dirs: bin
   main-is:        08_space_image_format.hs
   ghc-options:    -Wall
+
+executable 09_intcode_relative
+  build-depends:  base, aocintcode, containers
+  hs-source-dirs: bin
+  main-is:        09_intcode_relative.hs
+  ghc-options:    -Wall
