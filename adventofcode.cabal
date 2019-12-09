@@ -39,7 +39,8 @@ library aocintcode
   import: flags
   hs-source-dirs:  lib
   exposed-modules: AdventOfCode.Intcode
-  build-depends:   base, array, containers
+  -- !? added in array 0.5.6.0
+  build-depends:   base, array >= 0.5.6.0, containers
 
 library aocsearch
   import: flags
@@ -103,3 +104,8 @@ executable 08_space_image_format
   import: bin, flags
   build-depends: base, adventofcode2019
   main-is:       08_space_image_format.hs
+
+executable 09_intcode_relative
+  import: bin, flags
+  build-depends: base, aocintcode
+  main-is:       09_intcode_relative.hs

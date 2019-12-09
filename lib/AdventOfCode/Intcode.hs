@@ -13,7 +13,7 @@ module AdventOfCode.Intcode (
   writes,
 ) where
 
-import Data.Array.IArray ((!), listArray)
+import Data.Array.IArray ((!?), listArray)
 import Data.Array.Unboxed (UArray)
 import Data.Maybe (fromMaybe, maybeToList)
 import Data.IntMap (IntMap)
@@ -22,6 +22,7 @@ import System.Environment (getArgs)
 
 data Computer = Computer {
     pos :: Int
+  , relativeBase :: Int
   , romem :: UArray Int Int
   , rwmem :: IntMap Int
   , unusedInputs :: [Int]
@@ -44,6 +45,7 @@ defaults = Opts {
 computer :: [Int] -> Computer
 computer mem = Computer {
     pos = 0
+  , relativeBase = 0
   , romem = listArray (0, length mem - 1) mem
   , rwmem = IntMap.empty
   , unusedInputs = []
@@ -58,6 +60,7 @@ data Op =
   | Input
   | Output
   | Jump (Int -> Bool)
+  | RelativeBaseOffset
 
 intToOp :: Int -> Op
 intToOp 99 = Halt
@@ -69,6 +72,7 @@ intToOp 5 = Jump (/= 0)
 intToOp 6 = Jump (== 0)
 intToOp 7 = Binop (\a b -> if a < b then 1 else 0)
 intToOp 8 = Binop (\a b -> if a == b then 1 else 0)
+intToOp 9 = RelativeBaseOffset
 intToOp code = error ("unknown opcode " ++ show code)
 
 numParams :: Op -> Int
@@ -77,6 +81,7 @@ numParams (Binop _) = 3
 numParams Input = 1
 numParams Output = 1
 numParams (Jump _) = 2
+numParams RelativeBaseOffset = 1
 
 numOutputs :: Op -> Int
 numOutputs (Binop _) = 1
@@ -86,9 +91,11 @@ numOutputs _ = 0
 data Mode =
     Position
   | Immediate
+  | Relative
 
 intToModes :: Int -> [Mode]
 intToModes 0 = repeat Position
+intToModes n | n `mod` 10 == 2 = Relative : intToModes (n `div` 10)
 intToModes n | n `mod` 10 == 1 = Immediate : intToModes (n `div` 10)
 intToModes n | n `mod` 10 == 0 = Position : intToModes (n `div` 10)
 intToModes n = error ("bad mode " ++ show n)
@@ -109,7 +116,7 @@ continueInputs invals = continue (defaults { inputs = invals })
 
 memRead :: Int -> Computer -> Int
 memRead addr Computer { romem = ro, rwmem = rw } =
-  fromMaybe (ro ! addr) (IntMap.lookup addr rw)
+  fromMaybe (fromMaybe 0 (ro !? addr)) (IntMap.lookup addr rw)
 
 memWrite :: Int -> Int -> Computer -> Computer
 memWrite addr val comp = comp { rwmem = IntMap.insert addr val (rwmem comp) }
@@ -126,23 +133,29 @@ step' op modes comp =
   let values = [memRead (pos comp + n) comp | n <- [1 .. numParams op]]
       numInputs = numParams op - numOutputs op
 
-      resolv :: Int -> Mode -> Int
-      resolv ps Position = memRead ps comp
-      resolv imm Immediate = imm
+      offsetRelative :: Int -> Mode -> Int
+      offsetRelative addr Relative = addr + relativeBase comp
+      offsetRelative addr _ = addr
 
-      resolved = zipWith resolv (take numInputs values) modes
+      resolv :: Int -> Mode -> Int
+      resolv imm Immediate = imm
+      resolv addr _ = memRead addr comp
+
+      offset = zipWith offsetRelative values modes
+      resolved = zipWith resolv (take numInputs offset) modes
       pos' = pos comp + 1 + numParams op
       computer' = comp { pos = pos' }
   in case op of
   Halt -> computer' { halt = True }
-  Binop f -> memWrite (last values) (foldl1 f resolved) computer'
+  Binop f -> memWrite (last offset) (foldl1 f resolved) computer'
   Input -> case unusedInputs comp of
     [] -> comp { block = True } -- keep same pos, so comp not computer'
-    x:xs -> memWrite (last values) x computer' { unusedInputs = xs }
+    x:xs -> memWrite (last offset) x computer' { unusedInputs = xs }
   Output -> computer' { output = output computer' ++ resolved }
   Jump p -> case resolved of
     [test, posIfTrue] -> computer' { pos = if p test then posIfTrue else pos' }
     _ -> error "improper resolve of jump"
+  RelativeBaseOffset -> computer' { relativeBase = relativeBase computer' + head resolved }
 
 readInputFileOrIntcode :: IO [Int]
 readInputFileOrIntcode = do
