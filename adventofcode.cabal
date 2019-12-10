@@ -94,3 +94,9 @@ executable 09_intcode_relative
   hs-source-dirs: bin
   main-is:        09_intcode_relative.hs
   ghc-options:    -Wall
+
+executable 10_monitoring_station
+  build-depends:  base, adventofcode2019, containers
+  hs-source-dirs: bin
+  main-is:        10_monitoring_station.hs
+  ghc-options:    -Wall
