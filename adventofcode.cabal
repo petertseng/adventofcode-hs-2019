@@ -109,3 +109,8 @@ executable 09_intcode_relative
   import: bin, flags
   build-depends: base, aocintcode
   main-is:       09_intcode_relative.hs
+
+executable 10_monitoring_station
+  import: bin, flags
+  build-depends: base, adventofcode2019, containers
+  main-is:       10_monitoring_station.hs
