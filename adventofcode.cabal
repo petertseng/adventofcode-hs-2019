@@ -114,3 +114,8 @@ executable 10_monitoring_station
   import: bin, flags
   build-depends: base, adventofcode2019, containers
   main-is:       10_monitoring_station.hs
+
+executable 11_intcode_langtons_ant
+  import: bin, flags
+  build-depends: base, aocintcode, containers
+  main-is:       11_intcode_langtons_ant.hs
