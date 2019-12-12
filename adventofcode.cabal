@@ -106,3 +106,9 @@ executable 11_intcode_langtons_ant
   hs-source-dirs: bin
   main-is:        11_intcode_langtons_ant.hs
   ghc-options:    -Wall
+
+executable 12_n_body_problem
+  build-depends:  base, adventofcode2019, aocsplit, containers
+  hs-source-dirs: bin
+  main-is:        12_n_body_problem.hs
+  ghc-options:    -Wall
