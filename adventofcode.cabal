@@ -112,3 +112,9 @@ executable 12_n_body_problem
   hs-source-dirs: bin
   main-is:        12_n_body_problem.hs
   ghc-options:    -Wall
+
+executable 13_breakout
+  build-depends:  base, aocintcode, containers
+  hs-source-dirs: bin
+  main-is:        13_breakout.hs
+  ghc-options:    -Wall
