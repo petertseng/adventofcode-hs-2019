@@ -129,3 +129,8 @@ executable 13_breakout
   import: bin, flags
   build-depends: base, aocintcode, containers
   main-is:       13_breakout.hs
+
+executable 14_space_stoichiometry
+  import: bin, flags
+  build-depends: base, adventofcode2019, aocsplit, containers
+  main-is:       14_space_stoichiometry.hs
