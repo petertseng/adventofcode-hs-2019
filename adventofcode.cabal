@@ -118,3 +118,9 @@ executable 13_breakout
   hs-source-dirs: bin
   main-is:        13_breakout.hs
   ghc-options:    -Wall
+
+executable 14_space_stoichiometry
+  build-depends:  base, adventofcode2019, aocsplit, containers
+  hs-source-dirs: bin
+  main-is:        14_space_stoichiometry.hs
+  ghc-options:    -Wall
