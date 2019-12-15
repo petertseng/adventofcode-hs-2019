@@ -124,3 +124,9 @@ executable 14_space_stoichiometry
   hs-source-dirs: bin
   main-is:        14_space_stoichiometry.hs
   ghc-options:    -Wall
+
+executable 15_intcode_search
+  build-depends:  base, aocintcode, containers
+  hs-source-dirs: bin
+  main-is:        15_intcode_search.hs
+  ghc-options:    -Wall
