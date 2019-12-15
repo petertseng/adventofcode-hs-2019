@@ -134,3 +134,8 @@ executable 14_space_stoichiometry
   import: bin, flags
   build-depends: base, adventofcode2019, aocsplit, containers
   main-is:       14_space_stoichiometry.hs
+
+executable 15_intcode_search
+  import: bin, flags
+  build-depends: base, aocintcode
+  main-is:       15_intcode_search.hs
