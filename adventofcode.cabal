@@ -130,3 +130,9 @@ executable 15_intcode_search
   hs-source-dirs: bin
   main-is:        15_intcode_search.hs
   ghc-options:    -Wall
+
+executable 16_flawed_frequency_transmission
+  build-depends:  base, adventofcode2019, array
+  hs-source-dirs: bin
+  main-is:        16_flawed_frequency_transmission.hs
+  ghc-options:    -Wall
