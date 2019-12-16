@@ -139,3 +139,8 @@ executable 15_intcode_search
   import: bin, flags
   build-depends: base, aocintcode
   main-is:       15_intcode_search.hs
+
+executable 16_flawed_frequency_transmission
+  import: bin, flags
+  build-depends: base, adventofcode2019, array
+  main-is:       16_flawed_frequency_transmission.hs
