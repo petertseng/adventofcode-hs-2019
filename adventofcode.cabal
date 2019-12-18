@@ -142,3 +142,9 @@ executable 17_set_and_forget
   hs-source-dirs: bin
   main-is:        17_set_and_forget.hs
   ghc-options:    -Wall
+
+executable 18_many_worlds_interpretation
+  build-depends:  base, adventofcode2019, aocsearch, array, containers
+  hs-source-dirs: bin
+  main-is:        18_many_worlds_interpretation.hs
+  ghc-options:    -Wall
