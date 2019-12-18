@@ -150,3 +150,8 @@ executable 17_set_and_forget
   import: bin, flags
   build-depends: base, aocintcode, aocsplit, containers
   main-is:       17_set_and_forget.hs
+
+executable 18_many_worlds_interpretation
+  import: bin, flags
+  build-depends: base, adventofcode2019, aocsearch, array, containers
+  main-is:       18_many_worlds_interpretation.hs
