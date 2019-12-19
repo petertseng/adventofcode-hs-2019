@@ -1,10 +1,15 @@
 import AdventOfCode (readInputFile)
 
 import Control.Arrow (second)
+import Control.Monad (when)
+import Control.Monad.ST (ST, runST)
+import Data.Array.MArray (getElems, modifyArray, newArray)
+import Data.Array.ST (STUArray)
 import Data.Array.Unboxed ((!), UArray, bounds, elems, indices, listArray)
 import Data.Bits ((.&.))
 import Data.Char (digitToInt, intToDigit)
-import Data.List (dropWhileEnd, transpose)
+import Data.Foldable (for_)
+import Data.List (dropWhileEnd)
 
 fft1 :: UArray Int Int -> UArray Int Int
 fft1 digits = listArray (bounds digits) (map fft (indices digits))
@@ -40,16 +45,20 @@ binomMod10 n k = (b2 * 5 + b5 * 6) `mod` 10
         b5 = binomMod n k 5
 
 fft2 :: UArray Int Int -> Int -> [Int]
-fft2 digits offset = map ((`mod` 10) . sum) (transpose digitSums)
-  where (_, len0) = second succ (bounds digits)
-        len10k = len0 * 10000 - offset
-        digitSums = zipWith digitSum [0..] binomCoefficients
-        binomCoefficients = [binomMod10 (99 + i) i | i <- [0 .. (len10k - 1)]]
-        digitSum _ 0 = []
-        digitSum i bin =
-          let distFromEnd = len10k - i
-              n = min 8 distFromEnd
-          in [bin * digits ! ((offset + i + j) `mod` len0) | j <- [0 .. (n - 1)]]
+fft2 digits offset = runST $ do
+  let (_, len0) = second succ (bounds digits)
+      len10k = len0 * 10000 - offset
+  a <- newArray (0, 7) 0 :: ST s (STUArray s Int Int)
+  for_ [0 .. (len10k - 1)] $ \i -> do
+    let distFromEnd = len10k - i
+        n = min 8 distFromEnd
+        bin = binomMod10 (99 + i) i
+    when (bin /= 0) $
+      for_ [0 .. n - 1] $ \j -> do
+        let idx = (offset + i + j) `mod` len0
+        modifyArray a j (+ (bin * digits ! idx))
+  es <- getElems a
+  return (map (`mod` 10) es)
 
 main :: IO ()
 main = do
