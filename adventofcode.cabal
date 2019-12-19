@@ -155,3 +155,8 @@ executable 18_many_worlds_interpretation
   import: bin, flags
   build-depends: base, adventofcode2019, aocsearch, array, containers
   main-is:       18_many_worlds_interpretation.hs
+
+executable 19_intcode_tractor_beam
+  import: bin, flags
+  build-depends: base, aocintcode
+  main-is:       19_intcode_tractor_beam.hs
