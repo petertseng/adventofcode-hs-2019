@@ -148,3 +148,9 @@ executable 18_many_worlds_interpretation
   hs-source-dirs: bin
   main-is:        18_many_worlds_interpretation.hs
   ghc-options:    -Wall
+
+executable 19_intcode_tractor_beam
+  build-depends:  base, aocintcode
+  hs-source-dirs: bin
+  main-is:        19_intcode_tractor_beam.hs
+  ghc-options:    -Wall
