@@ -154,3 +154,9 @@ executable 19_intcode_tractor_beam
   hs-source-dirs: bin
   main-is:        19_intcode_tractor_beam.hs
   ghc-options:    -Wall
+
+executable 20_donut_maze
+  build-depends:  base, adventofcode2019, aocsearch, array, containers
+  hs-source-dirs: bin
+  main-is:        20_donut_maze.hs
+  ghc-options:    -Wall
