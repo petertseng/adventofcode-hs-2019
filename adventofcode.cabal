@@ -160,3 +160,8 @@ executable 19_intcode_tractor_beam
   import: bin, flags
   build-depends: base, aocintcode
   main-is:       19_intcode_tractor_beam.hs
+
+executable 20_donut_maze
+  import: bin, flags
+  build-depends: base, adventofcode2019, aocsearch, array, containers
+  main-is:       20_donut_maze.hs
