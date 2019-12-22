@@ -170,3 +170,8 @@ executable 21_springdroid_adventure
   import: bin, flags
   build-depends: base, aocintcode
   main-is:       21_springdroid_adventure.hs
+
+executable 22_slam_shuffle
+  import: bin, flags
+  build-depends: base, adventofcode2019
+  main-is:       22_slam_shuffle.hs
