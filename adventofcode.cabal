@@ -160,3 +160,9 @@ executable 20_donut_maze
   hs-source-dirs: bin
   main-is:        20_donut_maze.hs
   ghc-options:    -Wall
+
+executable 21_springdroid_adventure
+  build-depends:  base, aocintcode
+  hs-source-dirs: bin
+  main-is:        21_springdroid_adventure.hs
+  ghc-options:    -Wall
