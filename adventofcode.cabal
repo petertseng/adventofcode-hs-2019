@@ -175,3 +175,8 @@ executable 22_slam_shuffle
   import: bin, flags
   build-depends: base, adventofcode2019
   main-is:       22_slam_shuffle.hs
+
+executable 23_intcode_category_six
+  import: bin, flags
+  build-depends: base, aocintcode, containers
+  main-is:       23_intcode_category_six.hs
