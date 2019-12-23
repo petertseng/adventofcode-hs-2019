@@ -172,3 +172,9 @@ executable 22_slam_shuffle
   hs-source-dirs: bin
   main-is:        22_slam_shuffle.hs
   ghc-options:    -Wall
+
+executable 23_intcode_category_six
+  build-depends:  base, aocintcode, containers
+  hs-source-dirs: bin
+  main-is:        23_intcode_category_six.hs
+  ghc-options:    -Wall
