@@ -180,3 +180,8 @@ executable 23_intcode_category_six
   import: bin, flags
   build-depends: base, aocintcode, containers
   main-is:       23_intcode_category_six.hs
+
+executable 24_planet_of_discord
+  import: bin, flags
+  build-depends: base, adventofcode2019, containers
+  main-is:       24_planet_of_discord.hs
