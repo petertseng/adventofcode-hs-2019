@@ -178,3 +178,9 @@ executable 23_intcode_category_six
   hs-source-dirs: bin
   main-is:        23_intcode_category_six.hs
   ghc-options:    -Wall
+
+executable 24_planet_of_discord
+  build-depends:  base, adventofcode2019, containers
+  hs-source-dirs: bin
+  main-is:        24_planet_of_discord.hs
+  ghc-options:    -Wall
