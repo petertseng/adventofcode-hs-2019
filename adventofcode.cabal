@@ -39,6 +39,9 @@ library aocintcode
   import: flags
   hs-source-dirs:  lib
   exposed-modules: AdventOfCode.Intcode
+  -- Note that the intcode-single-memory branch could remove array here,
+  -- but that would cause everything to be rebuilt,
+  -- whereas I want to only rebuild aocintcode dependents.
   -- !? added in array 0.5.6.0
   build-depends:   base, array >= 0.5.6.0, containers
 

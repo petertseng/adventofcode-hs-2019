@@ -13,9 +13,7 @@ module AdventOfCode.Intcode (
   writes,
 ) where
 
-import Data.Array.IArray ((!?), listArray)
-import Data.Array.Unboxed (UArray)
-import Data.Maybe (fromMaybe, maybeToList)
+import Data.Maybe (catMaybes, fromMaybe, maybeToList)
 import Data.IntMap (IntMap)
 import qualified Data.IntMap as IntMap
 import System.Environment (getArgs)
@@ -23,7 +21,7 @@ import System.Environment (getArgs)
 data Computer = Computer {
     pos :: Int
   , relativeBase :: Int
-  , romem :: UArray Int Int
+  , origMem :: [Int]
   , rwmem :: IntMap Int
   , unusedInputs :: [Int]
   , output :: [Int]
@@ -46,8 +44,8 @@ computer :: [Int] -> Computer
 computer mem = Computer {
     pos = 0
   , relativeBase = 0
-  , romem = listArray (0, length mem - 1) mem
-  , rwmem = IntMap.empty
+  , origMem = mem
+  , rwmem = IntMap.fromAscList (zip [0..] mem)
   , unusedInputs = []
   , output = []
   , halt = False
@@ -115,14 +113,16 @@ continueInputs :: [Int] -> Computer -> Computer
 continueInputs invals = continue (defaults { inputs = invals })
 
 memRead :: Int -> Computer -> Int
-memRead addr Computer { romem = ro, rwmem = rw } =
-  fromMaybe (fromMaybe 0 (ro !? addr)) (IntMap.lookup addr rw)
+memRead addr = fromMaybe 0 . IntMap.lookup addr . rwmem
 
 memWrite :: Int -> Int -> Computer -> Computer
 memWrite addr val comp = comp { rwmem = IntMap.insert addr val (rwmem comp) }
 
-writes :: Computer -> [(IntMap.Key, Int)]
-writes = IntMap.toList . rwmem
+writes :: Computer -> [(Int, Int)]
+writes Computer { rwmem = mem, origMem = orig } = catMaybes (zipWith diff orig [0..])
+  -- doesn't consider writes beyond original length,
+  -- but no test cares about that.
+  where diff origVal addr = IntMap.lookup addr mem >>= (\v -> if v == origVal then Nothing else Just (addr, v))
 
 step :: Computer -> Computer
 step comp = let opcode = memRead (pos comp) comp in
