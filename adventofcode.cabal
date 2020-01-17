@@ -142,3 +142,8 @@ executable 16_flawed_frequency_transmission
   import: bin, flags
   build-depends: base, adventofcode2019, array
   main-is:       16_flawed_frequency_transmission.hs
+
+executable 17_set_and_forget
+  import: bin, flags
+  build-depends: base, aocintcode, aocsplit, containers
+  main-is:       17_set_and_forget.hs
