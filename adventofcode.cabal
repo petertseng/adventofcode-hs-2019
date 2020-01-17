@@ -136,3 +136,9 @@ executable 16_flawed_frequency_transmission
   hs-source-dirs: bin
   main-is:        16_flawed_frequency_transmission.hs
   ghc-options:    -Wall
+
+executable 17_set_and_forget
+  build-depends:  base, aocintcode, aocsplit, containers
+  hs-source-dirs: bin
+  main-is:        17_set_and_forget.hs
+  ghc-options:    -Wall
