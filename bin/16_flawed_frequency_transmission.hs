@@ -28,21 +28,13 @@ sumLeftArr arr = listArray (second succ (bounds arr)) (scanl (+) 0 (elems arr))
 snd3 :: (a, b, c) -> b
 snd3 (_, x, _) = x
 
-binom :: Int -> Int -> Int
-binom _ 0 = 1
-binom n k = n * binom (n - 1) (k - 1) `div` k
-
-binomMod :: Int -> Int -> Int -> Int
-binomMod _ 0 _ = 1
-binomMod n k m | n < m = binom n k `mod` m
-binomMod n k m = case binom (n `mod` m) (k `mod` m) `mod` m of
-  0 -> 0
-  r -> (r * binomMod (n `div` m) (k `div` m) m) `mod` m
-
-binomMod10 :: Int -> Int -> Int
-binomMod10 n k = (b2 * 5 + b5 * 6) `mod` 10
-  where b2 = if n .&. k == k then 1 else 0
-        b5 = binomMod n k 5
+binom99Mod10 :: Int -> Int
+binom99Mod10 i = (b2 * 5 + b5 * 6) `mod` 10
+  where b2 = if (i + 99) .&. 99 == 99 then 1 else 0
+        b5 = case i `mod` 125 of
+             0 -> 1
+             25 -> 4
+             _ -> 0
 
 fft2 :: UArray Int Int -> Int -> [Int]
 fft2 digits offset = runST $ do
@@ -52,7 +44,7 @@ fft2 digits offset = runST $ do
   for_ [0 .. (len10k - 1)] $ \i -> do
     let distFromEnd = len10k - i
         n = min 8 distFromEnd
-        bin = binomMod10 (99 + i) i
+        bin = binom99Mod10 i
     when (bin /= 0) $
       for_ [0 .. n - 1] $ \j -> do
         let idx = (offset + i + j) `mod` len0
